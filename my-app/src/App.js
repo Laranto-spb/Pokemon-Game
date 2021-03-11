@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Layout from './components/Layout';
+import bg1 from './assets/pokemonBg.jpg';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello! It's me! Whtas up?
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <>
+    <Header 
+      title = "This is title"
+      descr = "This is Description!"
+    />
+    <Layout 
+      title = "Первый блок"
+      descr = "Описание"
+      urlBg = {bg1}
+    />
+    <Layout 
+      title = "Второй блок"
+      descr = "Описание"
+      colorBg = "red"
+    />
+    <Layout 
+      title = "Третий блок"
+      descr = "Описание"
+      urlBg = {bg1}
+    />
+    <Footer />
+  </>
+  )
 }
 
 export default App;
