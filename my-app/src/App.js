@@ -8,23 +8,25 @@ const App = () => {
   <>
     <Header 
       title = "This is title"
-      descr = "This is Description!"
     />
     <Layout 
       title = "Первый блок"
-      descr = "Описание"
       urlBg = {bg1}
-    />
+    >
+    <p>Первый заголовок</p>
+    </Layout>
     <Layout 
       title = "Второй блок"
-      descr = "Описание"
       colorBg = "red"
-    />
+    >
+    <p>Второй заголовок</p>
+    </Layout>
     <Layout 
       title = "Третий блок"
-      descr = "Описание"
       urlBg = {bg1}
-    />
+    >
+    <p>Третий заголовок</p>
+    </Layout>
     <Footer />
   </>
   )

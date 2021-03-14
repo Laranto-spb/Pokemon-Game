@@ -1,12 +1,20 @@
 import s from './style.module.css';
 
-const Layout = ({title, descr, urlBg, colorBg}) => {
-  const bg = urlBg ? {background: `url(${urlBg})`} : {background: `${colorBg}`};
+const Layout = ({title, urlBg, colorBg}) => {
 
-  // `url(${urlBg})
+  const style = {};
+
+  if (urlBg) {
+    style.background = `url(${urlBg})`;
+  }
+
+  if (colorBg) {
+    style.background = `${colorBg}`;
+  }
+
   return (
     <>
-      <section className={s.root} style={bg}>
+      <section className={s.root} style={style}>
         <div className={s.wrapper}>
             <article>
                 <div className={s.title}>
