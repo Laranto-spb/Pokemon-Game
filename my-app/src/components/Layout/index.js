@@ -1,12 +1,20 @@
 import s from './style.module.css';
 
-const Layout = ({title, descr, urlBg, colorBg}) => {
-  const bg = urlBg ? {background: `url(${urlBg})`} : {background: `${colorBg}`};
+const Layout = ({title, urlBg, colorBg, children}) => {
 
-  // `url(${urlBg})
+  const style = {};
+
+  if (urlBg) {
+    style.background = `url(${urlBg})`;
+  }
+
+  if (colorBg) {
+    style.background = `${colorBg}`;
+  }
+
   return (
     <>
-      <section className={s.root} style={bg}>
+      <section className={s.root} style={style}>
         <div className={s.wrapper}>
             <article>
                 <div className={s.title}>
@@ -14,7 +22,7 @@ const Layout = ({title, descr, urlBg, colorBg}) => {
                     <span className={s.separator}></span>
                 </div>
                 <div className={[s.desc,s.full].join('')}>
-                    {descr && <p>{descr}</p>}
+                    {children}
                 </div>
             </article>
         </div>
