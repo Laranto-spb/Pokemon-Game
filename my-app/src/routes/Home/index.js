@@ -3,8 +3,8 @@ import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import bg1 from '../../assets/pokemonBg.jpg';
-import './style.module.css';
 import MenuHeader from '../../components/MenuHeader';
+import s from './style.module.css';
 
 const POKEMONS = [
   {
@@ -175,7 +175,7 @@ const HomePage = ({onChangePage}) => {
       title = "Cards"
       urlBg = {bg1}
     >
-    <div className="flex">
+    <div className={s.flex}>
       {
         POKEMONS.map(item => 
         <PokemonCard 
