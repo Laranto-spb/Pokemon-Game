@@ -3,9 +3,8 @@ import cn from 'classnames';
 
 const Menu = () => {
 
-
-  return (
-  <div className={cn(s.menuContainer, s.active)}>
+   return (
+  <div className={cn(s.menuContainer)}>   
   <div className={s.overlay} />
   <div className={s.menuItems}>
     <ul>
