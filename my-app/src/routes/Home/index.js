@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import bg1 from '../../assets/pokemonBg.jpg';
 import './style.module.css';
+import MenuHeader from '../../components/MenuHeader';
 
 const POKEMONS = [
   {
@@ -148,6 +149,7 @@ const HomePage = ({onChangePage}) => {
 
   return (
   <>
+    <MenuHeader/>
     <Header 
       title = "Pokemon Game"
       descr = "This is a trial game"
