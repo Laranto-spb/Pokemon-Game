@@ -16,7 +16,7 @@ const MenuHeader = () => {
     <>
     <Menu changeActive={isActive}/>
     <NavBar 
-        clickButton={hadlerClicker}
+        onClickButton={hadlerClicker}
         changeActive={isActive}
     />
     </>

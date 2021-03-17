@@ -11,13 +11,13 @@ const App = () => {
 
   switch (page) {
     case "app":
-      return <HomePage onChangePage={handleChangePage}/>
+      return <HomePage onChangePage={handleChangePage} />
 
     case "game":
-      return <GamePage onChangePage={handleChangePage}/>
+      return <GamePage onChangePage={handleChangePage} />
 
     default:
-      return <HomePage/>
+      return <HomePage />
   }
 
 }
