@@ -4,21 +4,22 @@ import { useState } from 'react';
 
 import './style.module.css';
 
-const MenuHeader = () => {
+const MenuHeader = ({bgActive}) => {
 
-  const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState(null);
 
-    const hadlerClicker = (state) => {
+  const hadlerClicker = (state) => {
     setActive(state);
   }
 
-    return (
+  return (
     <>
-    <Menu changeActive={isActive}/>
-    <NavBar 
+      <Menu changeActive={isActive} />
+      <NavBar
         onClickButton={hadlerClicker}
         changeActive={isActive}
-    />
+        bgActive={bgActive}
+      />
     </>
   )
 }
