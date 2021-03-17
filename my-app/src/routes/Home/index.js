@@ -142,9 +142,10 @@ const POKEMONS = [
 ];
 
 const HomePage = ({onChangePage}) => {
-
+  
   const handlerClickButton = (page) => {
     onChangePage && onChangePage(page);
+    
   }
 
   return (

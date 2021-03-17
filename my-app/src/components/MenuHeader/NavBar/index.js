@@ -1,14 +1,14 @@
 import s from './style.module.css';
 import cn from 'classnames';
-import { useState } from 'react';
 
 
-const NavBar = () => {
+const NavBar = ({clickButton, changeActive}) => {
 
-const [isActive, setActive] = useState(false);
+const handlerClick = () => {
 
-const handleClick = () => {
-  setActive(!isActive);
+    clickButton && clickButton(true)
+    
+
 }
 
 return (
@@ -17,9 +17,9 @@ return (
     <p className={s.brand}>
       LOGO
     </p>
-    <a href="#" className={cn(s.menuButton, {[s.active]: isActive})} onClick={handleClick}> 
+    <button className={cn(s.menuButton, s.btn_reset, {[s.active]: changeActive})} onClick={handlerClick}> 
       <span />
-    </a>
+    </button>
   </div>
 </nav>
 )

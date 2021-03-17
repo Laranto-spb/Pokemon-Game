@@ -27,12 +27,19 @@
 }
 
 /***** Menu Button *****/
+
+.btn_reset {
+  border: none;
+  background-color:transparent;
+}
 .menuButton {
   position: relative;
   height: 22px;
   width: 30px;
   outline: none;
 }
+
+
 
 .menuButton span,
 .menuButton span::before,
@@ -51,6 +58,7 @@
   top: 50%;
   transform: translate(0,-50%);
 }
+
 
 .menuButton span::before {
   top: -8px;
