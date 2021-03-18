@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 
 const NavBar = ({ onClickButton, changeActive, bgActive}) => {
-  console.log(bgActive)
   const handlerClick = () => {
     !changeActive && onClickButton && onClickButton(true)
     changeActive && onClickButton && onClickButton(false)

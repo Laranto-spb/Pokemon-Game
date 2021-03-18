@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import GamePage from './routes/Game';
-import HomePage from './routes/Home';
+import GamePage from './routes/GamePage';
+import HomePage from './routes/HomePage';
+import AboutPage from "./routes/AboutPage";
+import ContactPage from "./routes/ContactPage";
+import NotFound from './routes/NotFound';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const App = () => {
-  const [page, setPage] = useState("app");
 
-  const handleChangePage = (page) => {
-    setPage(page); //  Argument from Header -> Home/Game ->  'game'
-  }
+  return (
+      <BrowserRouter>
+          <Switch>
+              <Route path="/" exact component={HomePage}/>
+              <Route path="/game" component={GamePage}/>
+              <Route path="/about" component={AboutPage}/>
+              <Route path="/contact" component={ContactPage}/>
+              <Route component={NotFound}/>
+          </Switch>
+      </BrowserRouter>
+  )
 
-  switch (page) {
-    case "app":
-      return <HomePage onChangePage={handleChangePage} />
-
-    case "game":
-      return <GamePage onChangePage={handleChangePage} />
-
-    default:
-      return <HomePage />
-  }
 
 }
 

@@ -29,7 +29,7 @@
     transform: rotateY(180deg);
 }
 
-/* TODO: This place where we should change :hover on .active */
+
 .pokemonCard.active {
     transform: rotateY(0deg);
 }

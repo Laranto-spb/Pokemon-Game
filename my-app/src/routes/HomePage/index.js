@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import bg1 from '../../assets/pokemonBg.jpg';
+import bg2 from '../../assets/pokemonBg2.jpg';
 import MenuHeader from '../../components/MenuHeader';
 import s from './style.module.css';
 
@@ -145,7 +146,6 @@ const HomePage = ({ onChangePage }) => {
 
   const handlerClickButton = (page) => {
     onChangePage && onChangePage(page);
-
   }
 
   return (
@@ -158,7 +158,7 @@ const HomePage = ({ onChangePage }) => {
       />
       <Layout
         title="Первый блок"
-        urlBg={bg1}
+        urlBg={bg2}
       >
         <p>Первый заголовок</p>
       </Layout>
