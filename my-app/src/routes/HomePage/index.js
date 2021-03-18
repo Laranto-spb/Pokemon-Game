@@ -1,10 +1,8 @@
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import bg1 from '../../assets/pokemonBg.jpg';
 import bg2 from '../../assets/pokemonBg2.jpg';
-import MenuHeader from '../../components/MenuHeader';
 import s from './style.module.css';
 
 const POKEMONS = [
@@ -146,7 +144,6 @@ const HomePage = () => {
 
   return (
     <>
-      <MenuHeader />
       <Header
         title="Pokemon Game"
         descr="This is a trial game"
@@ -186,7 +183,6 @@ const HomePage = () => {
           }
         </div>
       </Layout>
-      <Footer />
     </>
   )
 }
