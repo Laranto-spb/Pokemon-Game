@@ -1,22 +1,23 @@
 import s from './style.module.css';
 import cn from 'classnames';
+import { Link } from "react-router-dom";
 
 const MENU = [
   {
     title: "HOME",
-    to: "#Home"
+    to: "/"
   },
   {
     title: "GAME",
-    to: "#Game"
+    to: "/game"
   },
   {
     title: "ABOUT",
-    to: "#About"
+    to: "/about"
   },
   {
     title: "CONTACT",
-    to: "#Contact"
+    to: "/contact"
   }
 ]
 
@@ -34,7 +35,7 @@ const Menu = ({ changeActive, onClickMenu }) => {
           {
             MENU.map(({title, to}, index) => (
                 <li key={index}>
-                  <a href={to} onClick={handlerClicker}>{title} </a>
+                  <Link to={to} onClick={handlerClicker}>{title} </Link>
                 </li>
             ))
           }

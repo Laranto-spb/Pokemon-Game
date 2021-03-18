@@ -142,11 +142,7 @@ const POKEMONS = [
   }
 ];
 
-const HomePage = ({ onChangePage }) => {
-
-  const handlerClickButton = (page) => {
-    onChangePage && onChangePage(page);
-  }
+const HomePage = () => {
 
   return (
     <>
@@ -154,7 +150,6 @@ const HomePage = ({ onChangePage }) => {
       <Header
         title="Pokemon Game"
         descr="This is a trial game"
-        onClickButton={handlerClickButton}
       />
       <Layout
         title="Первый блок"

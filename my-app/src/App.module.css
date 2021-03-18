@@ -1,0 +1,9 @@
+.wrap {
+    min-height: calc(100vh  - 100px);
+    padding: 95px 15px 40px 15px;
+
+}
+
+.wrap.isHome {
+    padding: 0;
+}
