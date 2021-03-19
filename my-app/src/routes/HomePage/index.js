@@ -1,9 +1,8 @@
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
 import bg1 from '../../assets/pokemonBg.jpg';
-import MenuHeader from '../../components/MenuHeader';
+import bg2 from '../../assets/pokemonBg2.jpg';
 import s from './style.module.css';
 
 const POKEMONS = [
@@ -141,24 +140,17 @@ const POKEMONS = [
   }
 ];
 
-const HomePage = ({ onChangePage }) => {
-
-  const handlerClickButton = (page) => {
-    onChangePage && onChangePage(page);
-
-  }
+const HomePage = () => {
 
   return (
     <>
-      <MenuHeader />
       <Header
         title="Pokemon Game"
         descr="This is a trial game"
-        onClickButton={handlerClickButton}
       />
       <Layout
         title="Первый блок"
-        urlBg={bg1}
+        urlBg={bg2}
       >
         <p>Первый заголовок</p>
       </Layout>
@@ -176,22 +168,7 @@ const HomePage = ({ onChangePage }) => {
         title="Cards"
         urlBg={bg1}
       >
-        <div className={s.flex}>
-          {
-            POKEMONS.map(item =>
-              <PokemonCard
-                key={item.id}
-                name={item.name}
-                img={item.img}
-                id={item.id}
-                type={item.type}
-                values={item.values}
-              />
-            )
-          }
-        </div>
       </Layout>
-      <Footer />
     </>
   )
 }

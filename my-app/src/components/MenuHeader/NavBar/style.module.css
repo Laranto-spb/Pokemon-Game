@@ -28,10 +28,6 @@
 
 /***** Menu Button *****/
 
-.btn_reset {
-  border: none;
-  background-color:transparent;
-}
 .menuButton {
   position: relative;
   height: 22px;
