@@ -168,20 +168,6 @@ const HomePage = () => {
         title="Cards"
         urlBg={bg1}
       >
-        <div className={s.flex}>
-          {
-            POKEMONS.map(item =>
-              <PokemonCard
-                key={item.id}
-                name={item.name}
-                img={item.img}
-                id={item.id}
-                type={item.type}
-                values={item.values}
-              />
-            )
-          }
-        </div>
       </Layout>
     </>
   )

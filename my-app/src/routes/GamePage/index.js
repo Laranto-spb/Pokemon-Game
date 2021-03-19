@@ -149,9 +149,8 @@ const GamePage = () => {
 
     const [isActivePokemon, setActivePokemon] = useState(activePokemons)
 
-
     const handlerClicker = (id) => {
-        activePokemons.map(item => item.id === id ? item.active = isActivePokemon : item);
+        activePokemons.forEach(item => id === item.id ? item.active = isActivePokemon : item);
         setActivePokemon(prev => !prev);
     }
 
@@ -161,7 +160,7 @@ const GamePage = () => {
             <button onClick={handlerClickButton}>Back to Home</button>
             <div className={s.flex}>
                 {
-                    activePokemons.map(({key, name, img, id, type, values, active}) =>
+                    activePokemons.map(({name, img, id, type, values, active}) =>
                         <PokemonCard
                             key={id}
                             name={name}
