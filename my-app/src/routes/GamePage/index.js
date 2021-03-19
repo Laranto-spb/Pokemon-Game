@@ -145,13 +145,15 @@ const GamePage = () => {
     }
 
     // TODO Correct array
-    const activePokemons = POKEMONS.slice();
+    const statePokemons = POKEMONS.map(item => {
+        return Object.assign({}, item);
+    });
 
-    const [isActivePokemon, setActivePokemon] = useState(activePokemons)
+    const [pokemons, setActivePokemon] = useState(statePokemons)
 
     const handlerClicker = (id) => {
-        activePokemons.forEach(item => id === item.id ? item.active = isActivePokemon : item);
-        setActivePokemon(prev => !prev);
+        pokemons.forEach(item => id === item.id ? item.active = !item.active : item);
+        setActivePokemon([...pokemons]);
     }
 
     return (
@@ -160,7 +162,7 @@ const GamePage = () => {
             <button onClick={handlerClickButton}>Back to Home</button>
             <div className={s.flex}>
                 {
-                    activePokemons.map(({name, img, id, type, values, active}) =>
+                    pokemons.map(({name, img, id, type, values, active}) =>
                         <PokemonCard
                             key={id}
                             name={name}
@@ -169,7 +171,7 @@ const GamePage = () => {
                             type={type}
                             values={values}
                             onClickCard={handlerClicker}
-                            isActive={active}
+                            isActive={!!active}
                         />
                     )
                 }
