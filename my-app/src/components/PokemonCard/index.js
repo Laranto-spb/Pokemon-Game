@@ -2,7 +2,7 @@ import s from './style.module.css';
 import cardBackSide from './assets/card-back-side.jpg';
 import cn from 'classnames';
 
-const PokemonCard = ({name, img, id, type, values, onClickCard, isActive}) => {
+const PokemonCard = ({pokemonKey, name, img, id, type, values, onClickCard, isActive}) => {
     const handleClicker = () => {
         onClickCard(id);
     }
