@@ -144,15 +144,16 @@ const GamePage = () => {
         history.push('/');
     }
 
-    const [isActivePokemon, setActivePokemon] = useState(null)
+    // TODO Correct array
+    const activePokemons = POKEMONS.slice();
+
+    const [isActivePokemon, setActivePokemon] = useState(activePokemons)
+
 
     const handlerClicker = (id) => {
-        POKEMONS.map(item => item.id === id ? item.active = true : item.active = false);
-        setActivePokemon(prev => !prev)
-        console.log(POKEMONS)
+        activePokemons.map(item => item.id === id ? item.active = isActivePokemon : item);
+        setActivePokemon(prev => !prev);
     }
-
-    console.log(POKEMONS[0].active)
 
     return (
         <>
@@ -160,7 +161,7 @@ const GamePage = () => {
             <button onClick={handlerClickButton}>Back to Home</button>
             <div className={s.flex}>
                 {
-                    POKEMONS.map(({key, name, img, id, type, values, active}) =>
+                    activePokemons.map(({key, name, img, id, type, values, active}) =>
                         <PokemonCard
                             key={id}
                             name={name}
