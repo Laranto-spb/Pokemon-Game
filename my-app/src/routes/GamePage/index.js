@@ -17,23 +17,15 @@ const GamePage = () => {
         database.ref('pokemons').once('value', (snapshot) => {
             setPokemons(snapshot.val());
         })
-
-
-    })
+    });
 
 
     const handlerClicker = (id, key) => {
         const pokemonKey = database.ref('pokemons/' + key);
-
-        setPokemons(prevState => {
-            return Array.from(prevState, item => id === item[key].id ? item[key].active = true : item);
-        });
-
-        //TODO Updating database
-        pokemonKey.update();
+        const stateActivePokemon = pokemons[key].active;
+        pokemonKey.update({active: !stateActivePokemon});
 
     };
-
 
     return (
         <>
@@ -56,6 +48,7 @@ const GamePage = () => {
                     )
                 }
             </div>
+            <button >Add pokemon</button>
         </>
     )
 }
