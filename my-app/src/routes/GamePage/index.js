@@ -27,6 +27,12 @@ const GamePage = () => {
 
     };
 
+    const handlerAddButton = () => {
+        const newPokemon = Object.entries(pokemons)[1][1];
+        const newKey = database.ref().child('pokemons').push().key;
+        database.ref('pokemons/' + newKey).set(newPokemon);
+    }
+
     return (
         <>
             <h1>This is Game Page!</h1>
@@ -48,7 +54,7 @@ const GamePage = () => {
                     )
                 }
             </div>
-            <button >Add pokemon</button>
+            <button onClick={handlerAddButton}>Add Pokemon</button>
         </>
     )
 }
