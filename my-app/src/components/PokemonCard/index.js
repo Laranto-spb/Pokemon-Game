@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 const PokemonCard = ({pokemonKey, name, img, id, type, values, onClickCard, isActive}) => {
     const handleClicker = () => {
-        onClickCard(id);
+        onClickCard(id, pokemonKey);
     }
     return (
         <>
