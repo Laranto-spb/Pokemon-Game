@@ -35,8 +35,12 @@ const GamePage = () => {
 
     return (
         <>
-            <h1>This is Game Page!</h1>
-            <button onClick={handlerClickButton}>Back to Home</button>
+            <h1 className={s.title}>This is Game Page!</h1>
+            <div className={s.buttons}>
+                <button className={s.home_btn} onClick={handlerClickButton}>Back to Home</button>
+                <button className={s.add_btn} onClick={handlerAddButton}>Add Pokemon</button>
+            </div>
+
             <div className={s.flex}>
                 {
                     Object.entries(pokemons).map(([key, item]) =>
@@ -54,7 +58,6 @@ const GamePage = () => {
                     )
                 }
             </div>
-            <button onClick={handlerAddButton}>Add Pokemon</button>
         </>
     )
 }

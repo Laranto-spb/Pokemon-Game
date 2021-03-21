@@ -1,4 +1,19 @@
+.title {
+    margin-bottom: 20px;
+}
+
 .flex {
     display: flex;
     flex-wrap: wrap;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.home_btn {
+    margin-bottom: 20px;
 }
