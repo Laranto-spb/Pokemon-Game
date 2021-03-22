@@ -14,17 +14,15 @@ const GamePage = () => {
     const [pokemons, setPokemons] = useState({});
 
     useEffect(() => {
-        database.ref('pokemons').once('value', (snapshot) => {
+        database.ref('pokemons').once('value').then((snapshot) => {
             setPokemons(snapshot.val());
-        })
+        });
     });
-
 
     const handlerClicker = (id, key) => {
         const pokemonKey = database.ref('pokemons/' + key);
         const stateActivePokemon = pokemons[key].active;
         pokemonKey.update({active: !stateActivePokemon});
-
     };
 
     const handlerAddButton = () => {
