@@ -1,142 +1,9 @@
 import {useHistory} from 'react-router-dom';
 import PokemonCard from "../../components/PokemonCard";
-import { useState } from 'react';
-import s from './style.module.css';
+import {useState, useEffect} from 'react';
 
-const POKEMONS = [
-    {
-        "abilities": [
-            "keen-eye",
-            "tangled-feet",
-            "big-pecks"
-        ],
-        "stats": {
-            "hp": 63,
-            "attack": 60,
-            "defense": 55,
-            "special-attack": 50,
-            "special-defense": 50,
-            "speed": 71
-        },
-        "type": "flying",
-        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
-        "name": "pidgeotto",
-        "base_experience": 122,
-        "height": 11,
-        "id": 17,
-        "values": {
-            "top": "A",
-            "right": 2,
-            "bottom": 7,
-            "left": 5
-        }
-    },
-    {
-        "abilities": [
-            "intimidate",
-            "shed-skin",
-            "unnerve"
-        ],
-        "stats": {
-            "hp": 60,
-            "attack": 95,
-            "defense": 69,
-            "special-attack": 65,
-            "special-defense": 79,
-            "speed": 80
-        },
-        "type": "poison",
-        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/24.png",
-        "name": "arbok",
-        "base_experience": 157,
-        "height": 35,
-        "id": 24,
-        "values": {
-            "top": 5,
-            "right": 9,
-            "bottom": "A",
-            "left": "A"
-        }
-    },
-    {
-        "abilities": [
-            "static",
-            "lightning-rod"
-        ],
-        "stats": {
-            "hp": 35,
-            "attack": 55,
-            "defense": 40,
-            "special-attack": 50,
-            "special-defense": 50,
-            "speed": 90
-        },
-        "type": "electric",
-        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-        "name": "pikachu",
-        "base_experience": 112,
-        "height": 4,
-        "id": 25,
-        "values": {
-            "top": 8,
-            "right": "A",
-            "bottom": 9,
-            "left": 6
-        }
-    },
-    {
-        "abilities": [
-            "overgrow",
-            "chlorophyll"
-        ],
-        "stats": {
-            "hp": 45,
-            "attack": 49,
-            "defense": 49,
-            "special-attack": 65,
-            "special-defense": 65,
-            "speed": 45
-        },
-        "type": "grass",
-        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-        "name": "bulbasaur",
-        "base_experience": 64,
-        "height": 7,
-        "id": 1,
-        "values": {
-            "top": 8,
-            "right": 4,
-            "bottom": 2,
-            "left": 7
-        }
-    },
-    {
-        "abilities": [
-            "blaze",
-            "solar-power"
-        ],
-        "stats": {
-            "hp": 39,
-            "attack": 52,
-            "defense": 43,
-            "special-attack": 60,
-            "special-defense": 50,
-            "speed": 65
-        },
-        "type": "fire",
-        "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
-        "name": "charmander",
-        "base_experience": 62,
-        "height": 6,
-        "id": 4,
-        "values": {
-            "top": 7,
-            "right": 6,
-            "bottom": 1,
-            "left": 4
-        }
-    }
-];
+import database from "../../service/firebase";
+import s from './style.module.css';
 
 const GamePage = () => {
     const history = useHistory();
@@ -144,32 +11,47 @@ const GamePage = () => {
         history.push('/');
     }
 
-    // TODO Correct array
-    const activePokemons = POKEMONS.slice();
+    const [pokemons, setPokemons] = useState({});
 
-    const [isActivePokemon, setActivePokemon] = useState(activePokemons)
+    useEffect(() => {
+        database.ref('pokemons').once('value').then((snapshot) => {
+            setPokemons(snapshot.val());
+        });
+    });
 
-    const handlerClicker = (id) => {
-        activePokemons.forEach(item => id === item.id ? item.active = isActivePokemon : item);
-        setActivePokemon(prev => !prev);
+    const handlerClicker = (id, key) => {
+        const pokemonKey = database.ref('pokemons/' + key);
+        const stateActivePokemon = pokemons[key].active;
+        pokemonKey.update({active: !stateActivePokemon});
+    };
+
+    const handlerAddButton = () => {
+        const newPokemon = Object.entries(pokemons)[1][1];
+        const newKey = database.ref().child('pokemons').push().key;
+        database.ref('pokemons/' + newKey).set(newPokemon);
     }
 
     return (
         <>
-            <h1>This is Game Page!</h1>
-            <button onClick={handlerClickButton}>Back to Home</button>
+            <h1 className={s.title}>This is Game Page!</h1>
+            <div className={s.buttons}>
+                <button className={s.home_btn} onClick={handlerClickButton}>Back to Home</button>
+                <button className={s.add_btn} onClick={handlerAddButton}>Add Pokemon</button>
+            </div>
+
             <div className={s.flex}>
                 {
-                    activePokemons.map(({name, img, id, type, values, active}) =>
+                    Object.entries(pokemons).map(([key, item]) =>
                         <PokemonCard
-                            key={id}
-                            name={name}
-                            img={img}
-                            id={id}
-                            type={type}
-                            values={values}
+                            key={key}
+                            pokemonKey={key}
+                            name={item.name}
+                            img={item.img}
+                            id={item.id}
+                            type={item.type}
+                            values={item.values}
                             onClickCard={handlerClicker}
-                            isActive={active}
+                            isActive={item.active}
                         />
                     )
                 }
