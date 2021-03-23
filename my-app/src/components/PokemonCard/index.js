@@ -2,7 +2,7 @@ import s from './style.module.css';
 import cn from 'classnames';
 
 const PokemonCard = ({
-                         className = 's.card',
+                         className,
                          minimize,
                          pokemonKey,
                          name,
@@ -12,7 +12,8 @@ const PokemonCard = ({
                          values,
                          onClickCard,
                          onSelectCard,
-                         isActive
+                         isActive,
+                         isSelected
                      }) => {
 
     const handleClicker = () => {
@@ -22,7 +23,8 @@ const PokemonCard = ({
 
     return (
         <>
-            <div className={cn(className, s.pokemonCard, {[s.active]: isActive})} onClick={handleClicker}>
+            <div className={cn(className, s.pokemonCard, {[s.active]: isActive, [s.selected]: isSelected})}
+                 onClick={handleClicker}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
                         <div className={cn(s.pokemon, s[type])}>

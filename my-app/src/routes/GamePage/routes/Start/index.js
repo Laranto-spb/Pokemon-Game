@@ -24,20 +24,27 @@ const StartPage = () => {
 
     useEffect(() => {
         getPokemons();
+        return () => {
+            firebase.offPokemonSoket();
+        }
     });
 
+    //Adding active state to Pokemon
     const handlerClicker = (key) => {
         const stateActivePokemon = pokemons[key].active;
-        firebase.postPokemon(key,{active: !stateActivePokemon})
+        firebase.postPokemon(key, {active: !stateActivePokemon})
     };
 
-
+    //Go to Board Page
     const handlerStartButton = () => {
         history.push('game/board');
     }
 
+    //Add selected pokemon to state in GamePage
     const handlerSelect = (key) => {
-        selectedPokemons.push(pokemons[key]);
+        const pokemon = {...pokemons[key]};
+        selectedPokemons.onSelectedPokemon(key, pokemon);
+        // selectedPokemons.pokemons.push(pokemons[key]);
     }
 
     return (
@@ -45,7 +52,7 @@ const StartPage = () => {
             <h1 className={s.title}>This is Game Page!</h1>
             <div className={s.buttons}>
                 <button className={s.home_btn} onClick={handlerClickButton}>Back to Home</button>
-                <button className={s.add_btn} onClick={handlerStartButton}>Start Game</button>
+                <button className={s.add_btn} onClick={handlerStartButton} disabled={Object.keys(selectedPokemons.pokemons).length < 5}>Start Game</button>
             </div>
 
             <div className={s.flex}>
@@ -53,7 +60,7 @@ const StartPage = () => {
                     Object.entries(pokemons).map(([key, item]) =>
                         <PokemonCard
                             key={key}
-                            className
+                            className={s.card}
                             minimize
                             pokemonKey={key}
                             name={item.name}
@@ -62,9 +69,15 @@ const StartPage = () => {
                             type={item.type}
                             values={item.values}
                             onClickCard={handlerClicker}
-                            onSelectCard = {handlerSelect}
+                            onSelectCard={() => {
+                                if (Object.keys(selectedPokemons.pokemons).length < 5) {
+                                    handlerSelect(key)
+                                }
+                            }
+                            }
                             // isActive={item.active}
                             isActive={true}
+                            isSelected={item.selected}
                         />
                     )
                 }
