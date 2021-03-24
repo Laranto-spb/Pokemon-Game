@@ -1,63 +1,39 @@
-import {useHistory} from 'react-router-dom';
-import PokemonCard from "../../components/PokemonCard";
-import {useState, useEffect} from 'react';
-
-import database from "../../service/firebase";
-import s from './style.module.css';
+import {useRouteMatch, Route, Switch} from "react-router-dom";
+import {useState} from 'react';
+import StartPage from "./routes/Start";
+import BoardPage from "./routes/Board";
+import FinishPage from "./routes/Finish";
+import {PokemonContext} from "../../context/pokemonContext";
 
 const GamePage = () => {
-    const history = useHistory();
-    const handlerClickButton = () => {
-        history.push('/');
-    }
+    const match = useRouteMatch();
+    const [selectedPokemon, setSelectedPokemon] = useState({});
 
-    const [pokemons, setPokemons] = useState({});
-
-    useEffect(() => {
-        database.ref('pokemons').once('value').then((snapshot) => {
-            setPokemons(snapshot.val());
+    const handlerSelectedPokemon = (key, pokemon) => {
+        setSelectedPokemon(prevState => {
+            if(prevState[key]) {
+                const copyState = {...prevState};
+                delete copyState[key];
+                return copyState;
+            }
+            return {
+                ...prevState,
+                [key]: pokemon
+            }
         });
-    });
-
-    const handlerClicker = (id, key) => {
-        const pokemonKey = database.ref('pokemons/' + key);
-        const stateActivePokemon = pokemons[key].active;
-        pokemonKey.update({active: !stateActivePokemon});
-    };
-
-    const handlerAddButton = () => {
-        const newPokemon = Object.entries(pokemons)[1][1];
-        const newKey = database.ref().child('pokemons').push().key;
-        database.ref('pokemons/' + newKey).set(newPokemon);
     }
-
     return (
-        <>
-            <h1 className={s.title}>This is Game Page!</h1>
-            <div className={s.buttons}>
-                <button className={s.home_btn} onClick={handlerClickButton}>Back to Home</button>
-                <button className={s.add_btn} onClick={handlerAddButton}>Add Pokemon</button>
-            </div>
-
-            <div className={s.flex}>
-                {
-                    Object.entries(pokemons).map(([key, item]) =>
-                        <PokemonCard
-                            key={key}
-                            pokemonKey={key}
-                            name={item.name}
-                            img={item.img}
-                            id={item.id}
-                            type={item.type}
-                            values={item.values}
-                            onClickCard={handlerClicker}
-                            isActive={item.active}
-                        />
-                    )
-                }
-            </div>
-        </>
-    )
-}
+        <PokemonContext.Provider value={{
+            pokemons: selectedPokemon,
+            onSelectedPokemon: handlerSelectedPokemon
+        }}>
+            <Switch>
+                <Route path={`${match.path}/`} exact component={StartPage}/>
+                <Route path={`${match.path}/board`} component={BoardPage}/>
+                <Route path={`${match.path}/finish`} component={FinishPage}/>
+            </Switch>
+        </PokemonContext.Provider>
+    );
+};
 
 export default GamePage;
