@@ -3,7 +3,7 @@ import {useState} from 'react';
 import cn from 'classnames';
 import s from "./style.module.css";
 
-const PlayerBoard = ({cards}) => {
+const PlayerBoard = ({cards, onClickCard, player}) => {
 
     const [isSelected, setSelected] = useState(null);
     return (
@@ -13,7 +13,12 @@ const PlayerBoard = ({cards}) => {
                     <div className={cn(s.cardBoard, {[s.selected]: isSelected === item.id})}
                          onClick={() => {
                              setSelected(item.id)
-                         }}>
+                             onClickCard && onClickCard({
+                                 player,
+                                 ...item,
+                             })
+                         }}
+                    >
                         <PokemonCard
                             pokemonKey={item.key}
                             minimize
@@ -31,6 +36,6 @@ const PlayerBoard = ({cards}) => {
         </>
     )
 
-}
+};
 
 export default PlayerBoard;
