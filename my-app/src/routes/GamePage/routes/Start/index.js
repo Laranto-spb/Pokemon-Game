@@ -69,7 +69,7 @@ const StartPage = () => {
                             onClickCard={handlerClicker}
                             onSelectCard={() => {
                                 if (Object.keys(selectedPokemons.pokemons).length < 5) {
-                                    handlerSelect(key)
+                                    handlerSelect(key);
                                 }
                             }
                             }

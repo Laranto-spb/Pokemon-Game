@@ -9,6 +9,7 @@ const GamePage = () => {
     const match = useRouteMatch();
     const [selectedPokemon, setSelectedPokemon] = useState({});
 
+
     const handlerSelectedPokemon = (key, pokemon) => {
         setSelectedPokemon(prevState => {
             if(prevState[key]) {
@@ -19,12 +20,15 @@ const GamePage = () => {
             return {
                 ...prevState,
                 [key]: pokemon
+
             }
         });
     }
+
+
     return (
         <PokemonContext.Provider value={{
-            pokemons: selectedPokemon,
+            pokemons: Object.values(selectedPokemon),
             onSelectedPokemon: handlerSelectedPokemon
         }}>
             <Switch>

@@ -4,11 +4,13 @@ import {PokemonContext} from "../../../../context/pokemonContext";
 import PokemonCard from "../../../../components/PokemonCard";
 import {useHistory} from 'react-router-dom';
 import {useEffect, useState} from 'react';
-
+import PlayerBoard from "./component/PlayerBoard";
 
 const BoardPage = () => {
 
-    const {pokemons} = useContext(PokemonContext);
+    const pokemonsContext = useContext(PokemonContext);
+    const pokemons = pokemonsContext.pokemons;
+
     const history = useHistory({});
     const [board, setBoard] = useState([]);
     const [player2, setPlayer2] = useState([]);
@@ -32,34 +34,19 @@ const BoardPage = () => {
     // if(Object.keys(pokemons).length === 0) {
     //     history.replace('/game')
     // }
-
     return (
         <div className={s.root}>
             <div className={s.playerOne}>
-                {
-                    Object.entries(pokemons).map(([key, {name, img, id, type, values}]) => (
-                        <PokemonCard
-                            key={key}
-                            className={s.card}
-                            minimize
-                            name={name}
-                            img={img}
-                            id={id}
-                            type={type}
-                            values={values}
-                            isActive
-                        />
-                    ))
-                }
+                <PlayerBoard cards={pokemons}/>
             </div>
             <div className={s.board}>
                 {
                     board.map((item) => (
                         <div key={item.position}
                              className={s.boardPlate}
-                        onClick={() => {
-                            !item.card && handlerClickBoardPlate(item.position);
-                        }}>
+                             onClick={() => {
+                                 !item.card && handlerClickBoardPlate(item.position);
+                             }}>
                             {
                                 item.card && <PokemonCard {...item} minimize/>
                             }
@@ -67,22 +54,8 @@ const BoardPage = () => {
                     ))
                 }
             </div>
-
             <div className={s.playerTwo}>
-                {
-                    player2.map(({name, img, id, type, values}) => (
-                        <PokemonCard
-                            className={s.card}
-                            minimize
-                            name={name}
-                            img={img}
-                            id={id}
-                            type={type}
-                            values={values}
-                            isActive
-                        />
-                    ))
-                }
+                <PlayerBoard cards={player2}/>
             </div>
 
         </div>

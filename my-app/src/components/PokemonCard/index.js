@@ -17,8 +17,8 @@ const PokemonCard = ({
                      }) => {
 
     const handleClicker = () => {
-        onClickCard(pokemonKey);
-        onSelectCard(pokemonKey);
+        onClickCard && onClickCard(pokemonKey);
+        onSelectCard && onSelectCard(pokemonKey);
     }
 
     return (
