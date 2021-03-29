@@ -37,7 +37,7 @@ const StartPage = () => {
 
     //Go to Board Page
     const handlerStartButton = () => {
-        history.push('game/board');
+        history.push('/game/board');
     }
 
     //Add selected pokemon to state in GamePage

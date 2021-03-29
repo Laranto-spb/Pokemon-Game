@@ -85,14 +85,14 @@ const BoardPage = () => {
                 history.replace('/game/finish');
             } else if (count1 < count2) {
                 alert('LOSE');
-                history.replace('/game/');
+                history.replace('/game');
             } else {
                 alert('DRAW');
-                history.replace('/game/');
+                history.replace('/game');
             }
 
         }
-    }, [steps])
+    }, [steps, board, history, player2, player1])
 
     useEffect(async () => {
         const boardResponce = await fetch('https://reactmarathon-api.netlify.app/api/board');
